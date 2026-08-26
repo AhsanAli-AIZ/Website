@@ -14,19 +14,21 @@ import pathlib
 ROOT = pathlib.Path(__file__).parent
 
 # page -> (nav key, breadcrumb trail as [(label, href), ...] excluding Home)
+# hrefs are extensionless (GitHub Pages resolves /path to path.html); index.html
+# keeps its extension so the shell still opens correctly via file://.
 PAGES = {
-    "index.html":                     ("home",        []),
-    "about.html":                     ("about",       [("About Us", None)]),
-    "products.html":                  ("products",    [("AIZ Vault", None)]),
-    "it-services.html":               ("it-services", [("IT Services", None)]),
-    "ai-development-automation.html": ("it-services", [("IT Services", "it-services.html"), ("AI Development & Automation", None)]),
-    "cloud-enablement.html":          ("it-services", [("IT Services", "it-services.html"), ("Cloud Enablement", None)]),
-    "mobile-web-development.html":    ("it-services", [("IT Services", "it-services.html"), ("Mobile & Web Development", None)]),
-    "custom-software-managed-it.html":("it-services", [("IT Services", "it-services.html"), ("Custom Software & Managed IT", None)]),
-    "vendors.html":                   ("vendors",     [("Vendors", None)]),
-    "become-a-partner.html":          ("partner",     [("Become a Partner", None)]),
-    "contact.html":                   ("contact",     [("Contact", None)]),
-    "thank-you.html":                 ("contact",     [("Contact", "contact.html"), ("Thank You", None)]),
+    "index.html":     ("home",     []),
+    "about.html":     ("about",    [("About Us", None)]),
+    "vault.html":     ("vault",    [("AIZ Vault", None)]),
+    "services.html":  ("services", [("IT Services", None)]),
+    "ai.html":        ("services", [("IT Services", "services"), ("AI Development & Automation", None)]),
+    "cloud.html":     ("services", [("IT Services", "services"), ("Cloud Enablement", None)]),
+    "mobile-web.html":("services", [("IT Services", "services"), ("Mobile & Web Development", None)]),
+    "software.html":  ("services", [("IT Services", "services"), ("Custom Software & Managed IT", None)]),
+    "vendors.html":   ("vendors",  [("Vendors", None)]),
+    "partner.html":   ("partner",  [("Become a Partner", None)]),
+    "contact.html":   ("contact",  [("Contact", None)]),
+    "thank-you.html": ("contact",  [("Contact", "contact"), ("Thank You", None)]),
 }
 
 FONTS = (
@@ -55,45 +57,45 @@ def header_html(current):
     </a>
     <ul class="nav-links" id="primary-nav">
       <li><a href="index.html"{nav_attr("home", current)}>Home</a></li>
-      <li><a href="about.html"{nav_attr("about", current)}>About</a></li>
+      <li><a href="about"{nav_attr("about", current)}>About</a></li>
       <li class="has-dropdown">
-        <a href="products.html"{nav_attr("products", current)} aria-expanded="false">AIZ Vault <span class="caret" aria-hidden="true">&#9662;</span></a>
+        <a href="vault"{nav_attr("vault", current)} aria-expanded="false">AIZ Vault <span class="caret" aria-hidden="true">&#9662;</span></a>
         <ul class="dropdown">
-          <li><a href="products.html">Overview</a></li>
+          <li><a href="vault">Overview</a></li>
         </ul>
       </li>
       <li class="has-dropdown">
-        <a href="it-services.html"{nav_attr("it-services", current)} aria-expanded="false">IT Services <span class="caret" aria-hidden="true">&#9662;</span></a>
+        <a href="services"{nav_attr("services", current)} aria-expanded="false">IT Services <span class="caret" aria-hidden="true">&#9662;</span></a>
         <div class="dropdown mega">
           <div class="mega-grid">
-            <a href="ai-development-automation.html">
+            <a href="ai">
               <span class="mega-title">AI Development &amp; Automation</span>
               <span class="mega-desc">Document processing, workflow automation, and models trained on your own data.</span>
             </a>
-            <a href="cloud-enablement.html">
+            <a href="cloud">
               <span class="mega-title">Cloud Enablement</span>
               <span class="mega-desc">Assessment, migration, and ongoing management across Azure, AWS, and Google Cloud.</span>
             </a>
-            <a href="mobile-web-development.html">
+            <a href="mobile-web">
               <span class="mega-title">Mobile &amp; Web Development</span>
               <span class="mega-desc">iOS, Android, and web builds with accessibility and performance budgets set up front.</span>
             </a>
-            <a href="custom-software-managed-it.html">
+            <a href="software">
               <span class="mega-title">Custom Software &amp; Managed IT</span>
               <span class="mega-desc">Line-of-business systems, plus a service desk with published response targets.</span>
             </a>
             <div class="mega-foot">
               <p>Not sure which fits? Compare all four side by side.</p>
-              <a class="btn btn-secondary" href="it-services.html">Compare services</a>
+              <a class="btn btn-secondary" href="services">Compare services</a>
             </div>
           </div>
         </div>
       </li>
-      <li><a href="vendors.html"{nav_attr("vendors", current)}>Vendors</a></li>
-      <li><a href="become-a-partner.html"{nav_attr("partner", current)}>Partner</a></li>
+      <li><a href="vendors"{nav_attr("vendors", current)}>Vendors</a></li>
+      <li><a href="partner"{nav_attr("partner", current)}>Partner</a></li>
     </ul>
     <div class="nav-cta">
-      <a class="btn btn-primary" href="contact.html">Book a consultation</a>
+      <a class="btn btn-primary" href="contact">Book a consultation</a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-controls="primary-nav" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -136,28 +138,28 @@ FOOTER = '''<footer class="site-footer">
       <div class="footer-col">
         <h2>Services</h2>
         <ul>
-          <li><a href="ai-development-automation.html">AI &amp; Automation</a></li>
-          <li><a href="cloud-enablement.html">Cloud Enablement</a></li>
-          <li><a href="mobile-web-development.html">Mobile &amp; Web</a></li>
-          <li><a href="custom-software-managed-it.html">Software &amp; Managed IT</a></li>
-          <li><a href="it-services.html">Compare all services</a></li>
+          <li><a href="ai">AI &amp; Automation</a></li>
+          <li><a href="cloud">Cloud Enablement</a></li>
+          <li><a href="mobile-web">Mobile &amp; Web</a></li>
+          <li><a href="software">Software &amp; Managed IT</a></li>
+          <li><a href="services">Compare all services</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h2>Company</h2>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="about.html#leadership">Leadership</a></li>
-          <li><a href="vendors.html">Vendors &amp; Partners</a></li>
-          <li><a href="become-a-partner.html">Become a Partner</a></li>
+          <li><a href="about">About Us</a></li>
+          <li><a href="about#leadership">Leadership</a></li>
+          <li><a href="vendors">Vendors &amp; Partners</a></li>
+          <li><a href="partner">Become a Partner</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h2>Get in touch</h2>
         <ul>
-          <li><a href="contact.html">Book a consultation</a></li>
+          <li><a href="contact">Book a consultation</a></li>
           <li><a href="mailto:ahsan@aizpro.com">ahsan@aizpro.com</a></li>
-          <li><a href="products.html">AIZ Vault</a></li>
+          <li><a href="vault">AIZ Vault</a></li>
           <li><a href="https://portal.aizvault.com" target="_blank" rel="noopener">Vault sign-in</a></li>
         </ul>
       </div>
@@ -165,9 +167,9 @@ FOOTER = '''<footer class="site-footer">
     <div class="footer-bottom">
       <div>&#169; 2026 AIZ Pro. All rights reserved.</div>
       <ul>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="vendors.html">Vendors</a></li>
-        <li><a href="become-a-partner.html">Partners</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="vendors">Vendors</a></li>
+        <li><a href="partner">Partners</a></li>
       </ul>
     </div>
   </div>
