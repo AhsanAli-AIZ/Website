@@ -482,7 +482,7 @@ section.loose  { padding: var(--sp-loose) 0; }
 }
 
 /* ---------- logo wall -------------------------------------- */
-.logo-wall { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; background: #fff; }
+.logo-wall { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; background: #fff; }
 .logo-cell {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 6px; padding: 30px 18px; text-align: center;
